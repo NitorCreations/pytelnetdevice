@@ -28,6 +28,9 @@ class TelnetDevice:
 
         await self.after_connect()
 
+    def connection(self):
+        return ExclusiveConnectionContext(self)
+
     async def after_connect(self):
         pass
 
