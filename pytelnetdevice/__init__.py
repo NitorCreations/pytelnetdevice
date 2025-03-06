@@ -27,8 +27,9 @@ class TelnetDevice:
         self._reader, self._writer = await asyncio.wait_for(
             asyncio.open_connection(self._host, self._port), timeout=self._timeout
         )
-        await self.after_connect()
         self._connected = True
+
+        await self.after_connect()
 
     def connection(self):
         return ExclusiveConnectionContext(self)
