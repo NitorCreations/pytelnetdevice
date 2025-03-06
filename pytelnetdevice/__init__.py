@@ -2,9 +2,10 @@ import asyncio
 
 
 class TelnetDevice:
-    def __init__(self, host: str, port: int) -> None:
+    def __init__(self, host: str, port: int, timeout: int = 5) -> None:
         self._host = host
         self._port = port
+        self._timeout = timeout
         self._reader: asyncio.StreamReader | None = None
         self._writer: asyncio.StreamWriter | None = None
         self._semaphore = asyncio.Semaphore()
@@ -23,7 +24,9 @@ class TelnetDevice:
         return None
 
     async def connect(self):
-        self._reader, self._writer = await asyncio.open_connection(self._host, self._port)
+        self._reader, self._writer = await asyncio.wait_for(
+            asyncio.open_connection(self._host, self._port), timeout=self._timeout
+        )
         await self.after_connect()
         self._connected = True
 
@@ -54,6 +57,7 @@ class TelnetDevice:
 
     def is_connected(self) -> bool:
         return self._connected
+
 
 class ExclusiveConnectionContext:
     """
