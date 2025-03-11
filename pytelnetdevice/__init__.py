@@ -9,6 +9,7 @@ class TelnetDevice:
         self._reader: asyncio.StreamReader | None = None
         self._writer: asyncio.StreamWriter | None = None
         self._semaphore = asyncio.Semaphore()
+        self._connection_context = ExclusiveConnectionContext(self)
         self._connected = False
 
     async def _read_until(self, phrase: str) -> str | None:
@@ -32,7 +33,7 @@ class TelnetDevice:
         await self.after_connect()
 
     def connection(self):
-        return ExclusiveConnectionContext(self)
+        return self._connection_context
 
     async def after_connect(self):
         pass
