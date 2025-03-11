@@ -1,5 +1,7 @@
 # pytelnetdevice
 
+[![Linting](https://github.com/NitorCreations/pytelnetdevice/actions/workflows/ruff.yaml/badge.svg)](https://github.com/NitorCreations/pytelnetdevice/actions/workflows/ruff.yaml)
+
 Base building block for libraries designed to communicate with Telnet-based devices. 
 It aims to abstract away the boilerplate needed to connect and disconnect from 
 devices, read bytes, handle eventual handshake requirements and ensuring concurrent 
