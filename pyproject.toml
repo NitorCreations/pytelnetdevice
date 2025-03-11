@@ -1,6 +1,6 @@
 [project]
 name = "pytelnetdevice"
-version = "0.1.0"
+version = "0.2.0"
 description = "Base building block for libraries designed to communicate with Telnet-based devices"
 readme = "README.md"
 authors = [
